@@ -7,7 +7,7 @@ namespace PingDong.CleanArchitect.Service.UnitTests
     public class IdentifiedCommandTests
     {
         [Fact]
-        public void IdentifiedCommnd_ThrowException_IfValueIsNull()
+        public void IdentifiedCommand_ThrowException_IfValueIsNull()
         {
             Assert.Throws<ArgumentNullException>(() => new IdentifiedCommand<Guid, string, TestRequest>(Guid.Empty, new TestRequest()));
             Assert.Throws<ArgumentNullException>(() => new IdentifiedCommand<Guid, string, TestRequest>(Guid.NewGuid(), null));
