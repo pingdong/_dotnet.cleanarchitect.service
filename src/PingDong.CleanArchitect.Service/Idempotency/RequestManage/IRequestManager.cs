@@ -1,12 +1,13 @@
-﻿using System;
+﻿using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
-namespace PingDong.CleanArchitect.Service.Idempotency
+[assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
+namespace PingDong.CleanArchitect.Service
 {
-    internal interface IRequestManager
+    internal interface IRequestManager<TId>
     {
-        Task<bool> CheckExistsAsync(Guid id);
+        Task<bool> CheckExistsAsync(TId id);
 
-        Task CreateRequestRecordAsync<T>(Guid id);
+        Task CreateRequestRecordAsync(TId id);
     }
 }

@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using PingDong.CleanArchitect.Service.Idempotency;
 
 namespace PingDong.CleanArchitect.Service
 {
@@ -7,8 +6,8 @@ namespace PingDong.CleanArchitect.Service
     {
         public virtual void Register(IServiceCollection services)
         {
-            // Idempotency: Register RequestManager
-            services.AddScoped(typeof(IRequestManager), typeof(RequestManager));
+            // Idempotent: Register RequestManager
+            services.AddScoped(typeof(IRequestManager<>), typeof(RequestManager<>));
         }
     }
 }
