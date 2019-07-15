@@ -6,7 +6,7 @@ using MediatR;
 [assembly: InternalsVisibleTo("PingDong.CleanArchitect.Service.UnitTests")]
 namespace PingDong.CleanArchitect.Service
 {
-    internal class IdentifiedCommand<TId, TResponse, TCommand> : IRequest<TResponse> where TCommand : IRequest<TResponse>
+    public class IdentifiedCommand<TId, TResponse, TCommand> : IRequest<TResponse> where TCommand : IRequest<TResponse>
     {
         public TCommand Command { get; }
 

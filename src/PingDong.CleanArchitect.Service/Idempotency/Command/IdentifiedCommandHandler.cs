@@ -15,7 +15,7 @@ namespace PingDong.CleanArchitect.Service.Idempotency
     /// <typeparam name="TCommand">Type of the command handler that performs the operation if request is not duplicated</typeparam>
     /// <typeparam name="TResponse">Return value of the inner command handler</typeparam>
     /// <typeparam name="TId"></typeparam>
-    internal class IdentifiedCommandHandler<TId, TResponse, TCommand> : IRequestHandler<IdentifiedCommand<TId, TResponse, TCommand>, TResponse>
+    public class IdentifiedCommandHandler<TId, TResponse, TCommand> : IRequestHandler<IdentifiedCommand<TId, TResponse, TCommand>, TResponse>
 		                                                            where TCommand : IRequest<TResponse>
 	{
 		private readonly IMediator _mediator;

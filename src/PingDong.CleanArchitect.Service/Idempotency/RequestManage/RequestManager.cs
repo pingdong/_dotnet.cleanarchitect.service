@@ -5,13 +5,13 @@ using PingDong.CleanArchitect.Infrastructure;
 
 namespace PingDong.CleanArchitect.Service
 {
-    internal class RequestManager<TId> : IRequestManager<TId>
+    public class RequestManager<TId> : IRequestManager<TId>
     {
         private readonly IRepository<TId, ClientRequest<TId>> _repository;
 
-        public RequestManager(IRepository<TId, ClientRequest<TId>> context)
+        public RequestManager(IRepository<TId, ClientRequest<TId>> repository)
         {
-            _repository = context ?? throw new ArgumentNullException(nameof(context));
+            _repository = repository ?? throw new ArgumentNullException(nameof(repository));
         }
 
         public async Task<bool> CheckExistsAsync(TId id)
