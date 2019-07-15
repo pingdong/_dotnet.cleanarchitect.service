@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 [assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
 namespace PingDong.CleanArchitect.Service
 {
-    internal interface IRequestManager<TId>
+    public interface IRequestManager<TId>
     {
         Task<bool> CheckExistsAsync(TId id);
 
