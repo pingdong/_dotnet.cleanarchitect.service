@@ -3,7 +3,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Moq;
-using PingDong.CleanArchitect.Service.Idempotency;
 using Xunit;
 
 namespace PingDong.CleanArchitect.Service.UnitTests

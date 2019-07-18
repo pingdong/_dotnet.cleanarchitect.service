@@ -3,7 +3,7 @@ using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace PingDong.CleanArchitect.Service.Idempotency
+namespace PingDong.CleanArchitect.Service
 {
     /// <summary>
     /// Provides a base implementation for handling duplicate request and ensuring idempotent updates, in the cases where
