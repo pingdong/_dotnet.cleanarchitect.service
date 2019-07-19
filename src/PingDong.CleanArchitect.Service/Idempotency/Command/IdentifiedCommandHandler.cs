@@ -7,7 +7,7 @@ namespace PingDong.CleanArchitect.Service
 {
     /// <summary>
     /// Provides a base implementation for handling duplicate request and ensuring idempotent updates, in the cases where
-    /// a requestid sent by client is used to detect duplicate requests.
+    /// a requestId sent by client is used to detect duplicate requests.
     /// 
     /// https://github.com/aspnet/DependencyInjection/issues/531
     /// https://github.com/aspnet/Home/issues/2341
@@ -15,8 +15,9 @@ namespace PingDong.CleanArchitect.Service
     /// <typeparam name="TCommand">Type of the command handler that performs the operation if request is not duplicated</typeparam>
     /// <typeparam name="TResponse">Return value of the inner command handler</typeparam>
     /// <typeparam name="TId"></typeparam>
-    public class IdentifiedCommandHandler<TId, TResponse, TCommand> : IRequestHandler<IdentifiedCommand<TId, TResponse, TCommand>, TResponse>
-		                                                            where TCommand : IRequest<TResponse>
+    public class IdentifiedCommandHandler<TId, TResponse, TCommand> 
+                : IRequestHandler<IdentifiedCommand<TId, TResponse, TCommand>, TResponse>
+		            where TCommand : IRequest<TResponse>
 	{
 		private readonly IMediator _mediator;
 		private readonly IRequestManager<TId> _requestManager;
