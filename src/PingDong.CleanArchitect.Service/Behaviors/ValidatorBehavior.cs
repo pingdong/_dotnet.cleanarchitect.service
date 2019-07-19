@@ -21,11 +21,10 @@ namespace PingDong.CleanArchitect.Service
         {
             if (!_validators.IsNullOrEmpty())
             {
-                var failures = _validators
-                    .Select(v => v.Validate(request))
-                    .SelectMany(result => result.Errors)
-                    .Where(error => error != null)
-                    .ToList();
+                var failures = _validators.Select(v => v.Validate(request))
+                                            .SelectMany(result => result.Errors)
+                                            .Where(error => error != null)
+                                            .ToList();
 
                 if (failures.Any())
                 {
