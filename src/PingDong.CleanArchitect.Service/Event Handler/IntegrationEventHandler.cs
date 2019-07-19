@@ -8,7 +8,7 @@ namespace PingDong.CleanArchitect.Service
     /// <summary>
     /// Provide the common functions for an IntegrationEvent handler
     /// </summary>
-    internal class IntegrationEventHandler
+    public class IntegrationEventHandler
     {
         private readonly IMediator _mediator;
         
