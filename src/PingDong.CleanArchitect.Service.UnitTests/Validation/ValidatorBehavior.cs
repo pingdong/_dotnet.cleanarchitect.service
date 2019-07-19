@@ -4,7 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using FluentValidation;
 using FluentValidation.Results;
-using PingDong.CleanArchitect.Core;
+using PingDong.CleanArchitect.Core.Validation;
 using Xunit;
 
 namespace PingDong.CleanArchitect.Service.UnitTests
