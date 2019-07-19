@@ -7,11 +7,11 @@ namespace PingDong.Newmoon.Places.Service.Commands
         /// <summary>
         /// Prepare an instance of Entity
         /// </summary>
-        /// <typeparam name="TEntityId"></typeparam>
+        /// <typeparam name="T"></typeparam>
         /// <param name="entity"></param>
         /// <param name="metadata"></param>
         /// <returns></returns>
-        public static Entity<TEntityId> Preprocess<TEntityId>(this Entity<TEntityId> entity, IMetadata metadata)
+        public static T Preprocess<T>(this T entity, IMetadata metadata) where T : IMetadata
         {
             entity.CorrelationId = metadata.CorrelationId;
             entity.TenantId = metadata.TenantId;
