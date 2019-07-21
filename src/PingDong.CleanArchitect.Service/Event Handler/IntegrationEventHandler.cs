@@ -36,7 +36,7 @@ namespace PingDong.CleanArchitect.Service
                 if (string.IsNullOrWhiteSpace(@event.RequestId))
                     return default;
 
-                if (Guid.TryParse(@event.RequestId, out var requestId))
+                if (!Guid.TryParse(@event.RequestId, out var requestId))
                     return default;
 
                 command.CorrelationId = @event.CorrelationId;
