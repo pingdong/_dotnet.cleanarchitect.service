@@ -46,10 +46,6 @@ namespace PingDong.CleanArchitect.Service
 		/// <returns>Return value of inner command or default value if request same ID was found</returns>
 		public async Task<TResponse> Handle(IdentifiedCommand<TId, TResponse, TCommand> message, CancellationToken cancellationToken = default)
 		{
-			var exists = await _requestManager.CheckExistsAsync(message.Id).ConfigureAwait(false);
-			if (exists)
-				return CreateResultForDuplicateRequest();
-
 			await _requestManager.CreateRequestRecordAsync(message.Id);
 
 			// Send the embedded business command to mediator so it runs its related CommandHandler 
