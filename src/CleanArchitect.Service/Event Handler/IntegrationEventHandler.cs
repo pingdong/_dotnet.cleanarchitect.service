@@ -24,28 +24,21 @@ namespace PingDong.CleanArchitect.Service
         /// <summary>
         /// Dispatch a new Command
         /// </summary>
-        /// <typeparam name="TResponse">The result type of the execution of the Command</typeparam>
+        /// <typeparam name="TCommand"></typeparam>
         /// <param name="command">The Command is going to be sent</param>
         /// <param name="event">The IntegrationEvent</param>
-        protected async Task<TResponse> DispatchAsync<TResponse>(Command<TResponse> command, IntegrationEvent @event = null)
+        protected async Task<bool> DispatchAsync<TCommand>(TCommand command, IntegrationEvent @event)
+            where TCommand: Command<bool>
         {
-            IRequest<TResponse> cmd;
+            if (@event == null)
+                throw new ArgumentNullException(nameof(@event));
 
-            if (@event != null)
-            {
-                if (string.IsNullOrWhiteSpace(@event.RequestId))
-                    return default;
+            command.CorrelationId = @event.CorrelationId;
+            command.TenantId = @event.TenantId;
+            if (!Guid.TryParse(@event.RequestId, out Guid requestId))
+                throw new ArgumentNullException();
 
-                if (!Guid.TryParse(@event.RequestId, out var requestId))
-                    return default;
-
-                command.CorrelationId = @event.CorrelationId;
-                command.TenantId = @event.TenantId;
-
-                cmd = new IdentifiedCommand<Guid, TResponse, Command<TResponse>>(requestId, command);
-            }
-            else
-                cmd = command;
+            var cmd = new IdentifiedCommand<Guid, bool, TCommand>(requestId, command);
 
             return await _mediator.Send(cmd).ConfigureAwait(false);
         }

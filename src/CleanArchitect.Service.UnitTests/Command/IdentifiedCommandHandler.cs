@@ -24,7 +24,7 @@ namespace PingDong.CleanArchitect.Service.UnitTests
         public async void IdentifiedCommandHandler_ReturnNull_IfDuplication()
         {
             var requestManager = new Mock<IRequestManager<Guid>>();
-            requestManager.Setup(m => m.CheckExistsAsync(It.IsAny<Guid>())).ReturnsAsync(true);
+            requestManager.Setup(m => m.EnsureNotExistsAsync(It.IsAny<Guid>()));
             
             var mediator = new Mock<IMediator>();
 
@@ -40,7 +40,7 @@ namespace PingDong.CleanArchitect.Service.UnitTests
         public async void IdentifiedCommandHandler_Process_IfNew()
         {
             var requestManager = new Mock<IRequestManager<Guid>>();
-            requestManager.Setup(m => m.CheckExistsAsync(It.IsAny<Guid>())).ReturnsAsync(false);
+            requestManager.Setup(m => m.EnsureNotExistsAsync(It.IsAny<Guid>()));
             requestManager.Setup(m => m.CreateRequestRecordAsync(It.IsAny<Guid>())).Returns(Task.CompletedTask);
             
             var mediator = new Mock<IMediator>();

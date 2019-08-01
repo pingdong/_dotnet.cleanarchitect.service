@@ -7,21 +7,22 @@ namespace PingDong.CleanArchitect.Service
 {
     public class RequestManager<TId> : IRequestManager<TId>
     {
-        private readonly IRepository<TId, ClientRequest<TId>> _repository;
+        private readonly IClientRequestRepository<TId> _repository;
 
-        public RequestManager(IRepository<TId, ClientRequest<TId>> repository)
+        public RequestManager(IClientRequestRepository<TId> repository)
         {
             _repository = repository ?? throw new ArgumentNullException(nameof(repository));
         }
 
-        public async Task<bool> CheckExistsAsync(TId id)
+        public async Task EnsureNotExistsAsync(TId id)
         {
             if (EqualityComparer<TId>.Default.Equals(id, default))
-                return false;
+                throw new ArgumentNullException(nameof(id));
 
             var request = await _repository.FindByIdAsync(id);
 
-            return request != default;
+            if (request != default)
+                throw new RequestDuplicatedException(id.ToString());
         }
 
         public async Task CreateRequestRecordAsync(TId id)
@@ -29,15 +30,13 @@ namespace PingDong.CleanArchitect.Service
             if (EqualityComparer<TId>.Default.Equals(id, default))
                 throw new ArgumentNullException(nameof(id));
 
-            var exists = await CheckExistsAsync(id);
+            await EnsureNotExistsAsync(id);
 
-            var request = exists 
-                            ? throw new RequestDuplicatedException($"Request with {id} already exists") 
-                            : new ClientRequest<TId>(typeof(TId).Name, DateTime.UtcNow);
+            var request = new ClientRequest<TId>(id, typeof(TId).Name, DateTime.UtcNow);
 
             await _repository.AddAsync(request);
 
-            await _repository.UnitOfWork.SaveEntitiesAsync();
+            await _repository.SaveChangesAsync();
         }
     }
 }

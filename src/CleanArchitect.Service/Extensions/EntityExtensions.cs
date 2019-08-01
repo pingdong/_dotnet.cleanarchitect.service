@@ -9,12 +9,12 @@ namespace PingDong.Newmoon.Places.Service.Commands
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="entity"></param>
-        /// <param name="metadata"></param>
+        /// <param name="tracker"></param>
         /// <returns></returns>
-        public static T Preprocess<T>(this T entity, IMetadata metadata) where T : IMetadata
+        public static T Preprocess<T>(this T entity, ITracker tracker) where T : ITracker
         {
-            entity.CorrelationId = metadata.CorrelationId;
-            entity.TenantId = metadata.TenantId;
+            entity.CorrelationId = tracker.CorrelationId;
+            entity.TenantId = tracker.TenantId;
 
             return entity;
         }

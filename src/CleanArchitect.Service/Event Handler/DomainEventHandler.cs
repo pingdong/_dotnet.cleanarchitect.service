@@ -28,20 +28,20 @@ namespace PingDong.CleanArchitect.Service
         /// <summary>
         /// Publish an IntegrationEvent to external Event Bus
         /// </summary>
-        /// <param name="metadata">The metadata</param>
+        /// <param name="tracker">The tracker</param>
         /// <param name="integrationEvent">The IntegrationEvent needs to be send</param>
         /// <returns></returns>
-        protected async Task PublishAsync(IntegrationEvent integrationEvent, IMetadata metadata = null)
+        protected async Task PublishAsync(IntegrationEvent integrationEvent, ITracker tracker = null)
         {
             if (integrationEvent == null)
                 throw new ArgumentNullException(nameof(integrationEvent));
 
-            if (metadata != null)
+            if (tracker != null)
             {
-                integrationEvent.CorrelationId = metadata.CorrelationId;
-                integrationEvent.TenantId = metadata.TenantId;
+                integrationEvent.CorrelationId = tracker.CorrelationId;
+                integrationEvent.TenantId = tracker.TenantId;
             }
-            
+
             await _eventBus.PublishAsync(integrationEvent).ConfigureAwait(false);
         }
         
@@ -50,17 +50,17 @@ namespace PingDong.CleanArchitect.Service
         /// </summary>
         /// <typeparam name="TResponse">The result type of the execution of the Command</typeparam>
         /// <param name="command">The Command is going to be sent</param>
-        /// <param name="metadata">The metadata</param>
+        /// <param name="tracker">The tracker</param>
         /// <returns></returns>
-        protected async Task<TResponse> DispatchAsync<TResponse>(Command<TResponse> command, IMetadata metadata = null)
+        protected async Task<TResponse> DispatchAsync<TResponse>(Command<TResponse> command, ITracker tracker = null)
         {
             if (command == null)
                 throw new ArgumentNullException(nameof(command));
 
-            if (metadata != null)
+            if (tracker != null)
             {
-                command.TenantId = metadata.TenantId;
-                command.CorrelationId = metadata.CorrelationId;
+                command.TenantId = tracker.TenantId;
+                command.CorrelationId = tracker.CorrelationId;
             }
             
             return await _mediator.Send(command).ConfigureAwait(false);
