@@ -1,8 +1,8 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using MediatR.Pipeline;
+using Microsoft.Extensions.Logging;
+using PingDong.CleanArchitect.Core;
 using System.Threading;
 using System.Threading.Tasks;
-using MediatR.Pipeline;
-using PingDong.CleanArchitect.Core;
 
 namespace PingDong.CleanArchitect.Service
 {

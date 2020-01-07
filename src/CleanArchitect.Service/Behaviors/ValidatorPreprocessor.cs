@@ -1,11 +1,11 @@
 ﻿using FluentValidation;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 using MediatR.Pipeline;
 using Microsoft.Extensions.Logging;
 using PingDong.CleanArchitect.Core;
 using PingDong.Linq;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace PingDong.CleanArchitect.Service
 {

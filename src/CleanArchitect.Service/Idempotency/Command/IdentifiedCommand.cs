@@ -1,7 +1,7 @@
-﻿using System;
+﻿using MediatR;
+using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
-using MediatR;
 
 [assembly: InternalsVisibleTo("PingDong.CleanArchitect.Service.UnitTests")]
 namespace PingDong.CleanArchitect.Service

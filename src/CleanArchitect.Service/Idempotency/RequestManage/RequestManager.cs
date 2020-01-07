@@ -1,7 +1,7 @@
-﻿using System;
+﻿using PingDong.CleanArchitect.Infrastructure;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using PingDong.CleanArchitect.Infrastructure;
 
 namespace PingDong.CleanArchitect.Service
 {
@@ -26,7 +26,7 @@ namespace PingDong.CleanArchitect.Service
         }
 
         public async Task CreateRequestRecordAsync(TId id)
-        { 
+        {
             if (EqualityComparer<TId>.Default.Equals(id, default))
                 throw new ArgumentNullException(nameof(id));
 

@@ -1,9 +1,7 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-using Moq;
-using PingDong.CleanArchitect.Core;
+﻿using Moq;
 using PingDong.CleanArchitect.Infrastructure;
+using System;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace PingDong.CleanArchitect.Service.UnitTests
@@ -20,7 +18,7 @@ namespace PingDong.CleanArchitect.Service.UnitTests
         public async void RequestManager_CheckExists_ReturnTrue_IfExists()
         {
             var mock = new Mock<IClientRequestRepository<Guid>>();
-            mock.Setup(m => m.FindByIdAsync(It.IsAny<Guid>())).ReturnsAsync(new ClientRequest<Guid>(Guid.NewGuid() ,"Test", DateTime.Now));
+            mock.Setup(m => m.FindByIdAsync(It.IsAny<Guid>())).ReturnsAsync(new ClientRequest<Guid>(Guid.NewGuid(), "Test", DateTime.Now));
 
             var requestManager = new RequestManager<Guid>(mock.Object);
             await Assert.ThrowsAsync<RequestDuplicatedException>(() => requestManager.EnsureNotExistsAsync(Guid.NewGuid()));
@@ -58,7 +56,7 @@ namespace PingDong.CleanArchitect.Service.UnitTests
 
             var requestManager = new RequestManager<Guid>(mock.Object);
             await requestManager.CreateRequestRecordAsync(Guid.NewGuid());
-            
+
             mock.Verify(m => m.FindByIdAsync(It.IsAny<Guid>()), Times.Once);
             mock.Verify(m => m.AddAsync(It.IsAny<ClientRequest<Guid>>()), Times.Once);
         }
@@ -67,12 +65,12 @@ namespace PingDong.CleanArchitect.Service.UnitTests
         public async void RequestManager_Create_IfExists()
         {
             var mock = new Mock<IClientRequestRepository<Guid>>();
-            mock.Setup(m => m.FindByIdAsync(It.IsAny<Guid>())).ReturnsAsync(new ClientRequest<Guid>(Guid.NewGuid() ,"Test", DateTime.Now));
-            
+            mock.Setup(m => m.FindByIdAsync(It.IsAny<Guid>())).ReturnsAsync(new ClientRequest<Guid>(Guid.NewGuid(), "Test", DateTime.Now));
+
             var requestManager = new RequestManager<Guid>(mock.Object);
-            
+
             await Assert.ThrowsAsync<RequestDuplicatedException>(() => requestManager.CreateRequestRecordAsync(Guid.NewGuid()));
-            
+
             mock.Verify(m => m.FindByIdAsync(It.IsAny<Guid>()), Times.Once);
         }
     }

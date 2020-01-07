@@ -1,5 +1,5 @@
-﻿using System;
-using MediatR;
+﻿using MediatR;
+using System;
 using Xunit;
 
 namespace PingDong.CleanArchitect.Service.UnitTests
@@ -16,7 +16,7 @@ namespace PingDong.CleanArchitect.Service.UnitTests
         [Fact]
         public void IdentifiedCommnd_PropertyReturn_ValueAssigned()
         {
-            var request = new TestRequest {Name = "Test"};
+            var request = new TestRequest { Name = "Test" };
             var command = new IdentifiedCommand<Guid, string, TestRequest>(Guid.NewGuid(), request);
 
             Assert.Equal("Test", command.Command.Name);
