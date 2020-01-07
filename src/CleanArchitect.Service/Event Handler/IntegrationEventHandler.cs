@@ -1,7 +1,7 @@
-﻿using System;
-using System.Threading.Tasks;
-using MediatR;
+﻿using MediatR;
 using PingDong.CleanArchitect.Core;
+using System;
+using System.Threading.Tasks;
 
 namespace PingDong.CleanArchitect.Service
 {
@@ -11,7 +11,7 @@ namespace PingDong.CleanArchitect.Service
     public class IntegrationEventHandler
     {
         private readonly IMediator _mediator;
-        
+
         /// <summary>
         /// Initialize the object
         /// </summary>
@@ -28,7 +28,7 @@ namespace PingDong.CleanArchitect.Service
         /// <param name="command">The Command is going to be sent</param>
         /// <param name="event">The IntegrationEvent</param>
         protected async Task<bool> DispatchAsync<TCommand>(TCommand command, IntegrationEvent @event)
-            where TCommand: Command<bool>
+            where TCommand : Command<bool>
         {
             if (@event == null)
                 throw new ArgumentNullException(nameof(@event));

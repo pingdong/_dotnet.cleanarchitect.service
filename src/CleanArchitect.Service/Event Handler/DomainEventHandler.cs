@@ -1,8 +1,8 @@
-﻿using System;
-using System.Threading.Tasks;
-using MediatR;
+﻿using MediatR;
 using PingDong.CleanArchitect.Core;
 using PingDong.EventBus.Core;
+using System;
+using System.Threading.Tasks;
 
 namespace PingDong.CleanArchitect.Service
 {
@@ -44,7 +44,7 @@ namespace PingDong.CleanArchitect.Service
 
             await _eventBus.PublishAsync(integrationEvent).ConfigureAwait(false);
         }
-        
+
         /// <summary>
         /// Dispatch a new Command
         /// </summary>
@@ -62,7 +62,7 @@ namespace PingDong.CleanArchitect.Service
                 command.TenantId = tracker.TenantId;
                 command.CorrelationId = tracker.CorrelationId;
             }
-            
+
             return await _mediator.Send(command).ConfigureAwait(false);
         }
     }

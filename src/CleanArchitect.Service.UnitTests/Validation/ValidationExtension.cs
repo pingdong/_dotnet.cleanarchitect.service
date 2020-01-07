@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-using FluentValidation;
+﻿using FluentValidation;
 using FluentValidation.Results;
 using PingDong.CleanArchitect.Core;
 using PingDong.CleanArchitect.Core.Validation;
+using System;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace PingDong.CleanArchitect.Service.UnitTests
@@ -53,7 +53,7 @@ namespace PingDong.CleanArchitect.Service.UnitTests
             public ValidationResult Validate(TestObject instance)
             {
                 if (instance.Name != _target)
-                    return new ValidationResult(new List<ValidationFailure> {new ValidationFailure("A", "error")});
+                    return new ValidationResult(new List<ValidationFailure> { new ValidationFailure("A", "error") });
 
                 return new ValidationResult();
             }
@@ -74,8 +74,8 @@ namespace PingDong.CleanArchitect.Service.UnitTests
         [Fact]
         public void ValidatorExtension_Invalid()
         {
-            var validators = new List<IValidator<TestObject>> {new TestValidator("abc")};
-            var target = new TestObject {Name = "ABC"};
+            var validators = new List<IValidator<TestObject>> { new TestValidator("abc") };
+            var target = new TestObject { Name = "ABC" };
 
             Assert.Throws<ValidationException>(() => validators.Validate(target));
         }
@@ -83,8 +83,8 @@ namespace PingDong.CleanArchitect.Service.UnitTests
         [Fact]
         public void ValidatorExtension_Valid()
         {
-            var validators = new List<IValidator<TestObject>> {new TestValidator("abc")};
-            var target = new TestObject {Name = "abc"};
+            var validators = new List<IValidator<TestObject>> { new TestValidator("abc") };
+            var target = new TestObject { Name = "abc" };
 
             validators.Validate(target);
         }
