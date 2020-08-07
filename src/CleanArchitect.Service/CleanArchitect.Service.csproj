@@ -18,6 +18,8 @@
     <PackageTags>dotnet</PackageTags>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/pingdong/dotnet.cleanarchitect.service</PackageProjectUrl>
+    <AssemblyName>PingDong.CleanArchitect.Service</AssemblyName>
+    <RootNamespace>PingDong.CleanArchitect.Service</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

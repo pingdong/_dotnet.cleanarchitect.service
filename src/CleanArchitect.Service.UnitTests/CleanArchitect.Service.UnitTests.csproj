@@ -6,6 +6,8 @@
     <IsPackable>false</IsPackable>
 
     <AssemblyName>PingDong.CleanArchitect.Service.UnitTests</AssemblyName>
+
+    <RootNamespace>PingDong.CleanArchitect.Service.UnitTests</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
